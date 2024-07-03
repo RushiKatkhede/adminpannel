@@ -1,0 +1,10 @@
+<div mat-dialog-content class="otp-dialog-content">
+    <h5 class="otp-dialog-title">Please enter the OTP</h5>
+    <mat-form-field class="otp-form-field">
+        <input matInput type="text" placeholder="Enter OTP" [(ngModel)]="otp" required>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions class="otp-dialog-actions">
+    <button mat-button [mat-dialog-close]="otp" cdkFocusInitial color="primary" class="otp-submit-button">Submit
+    </button>
+</div>

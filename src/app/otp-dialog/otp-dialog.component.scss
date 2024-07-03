@@ -1,0 +1,26 @@
+.otp-dialog-content {
+  text-align: center;
+}
+
+.otp-dialog-title {
+  color: #333; /* Title color */
+  margin-bottom: 20px;
+}
+
+.otp-form-field {
+  width: 100%;
+}
+
+.otp-dialog-actions {
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.otp-submit-button {
+  background-color: #4caf50; /* Green button background color */
+  color: #fff; /* Button text color */
+}
+
+.otp-submit-button:hover {
+  background-color: #388e3c; /* Hover background color */
+}

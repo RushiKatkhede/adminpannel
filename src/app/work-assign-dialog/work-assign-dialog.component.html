@@ -1,0 +1,14 @@
+<form (ngSubmit)="submitForm()" [formGroup]="form">
+    <div>
+        <label for="datetime">Select Date and Time:</label><br><br>
+        <input type="datetime-local" id="datetime" name="dateAndTime" formControlName="dateAndTime">
+        <br><br><br>
+    </div>
+    <mat-form-field>
+        <input matInput placeholder="Message" name="msg" id="msg" formControlName="msg" required>
+        <!-- Make sure the formControlName matches the name defined in the form group -->
+        <mat-error *ngIf="form.get('msg').hasError('required')">Message is required</mat-error>
+    </mat-form-field>
+    <button mat-button type="submit">Assign</button>
+    <button mat-button mat-dialog-close>Cancel</button>
+</form>

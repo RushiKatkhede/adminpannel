@@ -1,0 +1,98 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">Work History</h4>
+                        <p class="card-category">All users who get approval</p>
+                        <div class="col-md-12">
+                            <form>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-field">
+                                            <mat-form-field class="example-full-width">
+                                                <mat-select placeholder="Site" formControlName="site" name="site" required
+                                                            (selectionChange)="onSiteSelectionChange($event.value)">
+                                                    <mat-option *ngFor="let site of siteOptions" [value]="site">{{ site }}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                            <mat-select placeholder="User Name"
+                                                        name="userName" formControlName="name" required
+                                                        (selectionChange)="onUserNameSelectionChange($event.value)">
+                                                <mat-option *ngFor="let user of userNameData" [value]="user.userName">
+                                                    {{ user.userName }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
+                        </div>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="workHistoryTable">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>for_date</th>
+                                    <th>rc_no.</th>
+                                    <th>site</th>
+                                    <th>name</th>
+                                    <th>number</th>
+                                    <th>type</th>
+                                    <th>vehicle_model</th>
+                                    <th>checkIn</th>
+                                    <th>checkOut</th>
+                                    <th>totalTime</th>
+                                    <th>startKm</th>
+                                    <th>endKm</th>
+                                    <th>totalKm</th>
+                                    <th>reportingStatus</th>
+                                    <th>price</th>
+                                    <th>checkInImage</th>
+                                    <th>checkOutImage</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of filteredData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ user.Attednacedate | date: 'dd-MM-yyyy' }}</td>
+                                    <td>{{ user.rc_no }}</td>
+                                    <td>{{ user.site }}</td>
+                                    <td>{{ user.userName }}</td>
+                                    <td>{{ user.phone }}</td>
+                                    <td>{{ user.type }}</td>
+                                    <td>{{ user.vehicle_model }}</td>
+                                    <td>{{ user.checkInTime.seconds * 1000 | date: 'HH:mm:a' }}</td>
+                                    <td>{{ user.checkOutTime.seconds * 1000 | date: 'HH:mm:a' }}</td>
+                                    <td>{{ calculateTotalTime(user.checkInTime.toDate(), user.checkOutTime.toDate()) }}</td>
+                                    <td>{{ user.checkInKm }}</td>
+                                    <td>{{ user.checkOutKm }}</td>
+                                    <td>{{ calculateTotalKm(user.checkInKm, user.checkOutKm) }}</td>
+                                    <td>{{ user.attendanceStatus }}</td>
+                                    <td>{{ calculatePrice(user.checkInKm,user.checkOutKm, user) }}</td>
+                                    <td><img [src]="user.checkInImageUrl" alt="Check In Image" style="max-width: 40px;">
+                                    </td>
+                                    <td><img [src]="user.checkOutImageUrl" alt="Check Out Image"
+                                             style="max-width: 40px;"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" (click)="exportToExcel()">Export to Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+.site-label {
+    color: white;
+}
+::ng-deep .white-text .mat-select-value {
+    color: white;
+}
