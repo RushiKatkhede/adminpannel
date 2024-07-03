@@ -1,0 +1,32 @@
+<h2 mat-dialog-title class="mat-primary">Status Details</h2>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <h5>Name: {{ userName }} | {{ phone }}</h5>
+        <div class="form-field">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Transaction ID" formControlName="transactionID" required>
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Amount" formControlName="amount" required>
+            </mat-form-field>
+        </div>
+        <div class="form-field">
+            <mat-form-field class="example-full-width">
+                <mat-select placeholder="Remark" formControlName="remark" required>
+                    <mat-option *ngFor="let status of statusOptions" [value]="status">{{ status }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <!-- Add other form fields as needed -->
+
+        <div mat-dialog-actions>
+            <button mat-raised-button color="primary" type="submit" (click)="submitForm()">
+                Save
+            </button>
+            <button mat-raised-button color="warn" (click)="closeDialog()">Close</button>
+        </div>
+    </form>
+</div>

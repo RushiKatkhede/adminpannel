@@ -1,0 +1,16 @@
+/* Assuming you have a CSS file named dashboard.component.css */
+
+#websiteViewsChart {
+    display: flex;
+    justify-content: center; /* Center the chart horizontally */
+    align-items: center; /* Align the items vertically */ /* Adjust the height as needed */
+    width: 100%; /* Ensure the chart occupies the full width of its container */
+}
+
+.ct-series-bars .ct-bar {
+    stroke-width: 60px; /* Adjust the bar width */
+}
+
+.ct-label.ct-horizontal.ct-end {
+    text-align: center; /* Center-align the labels */
+}

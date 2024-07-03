@@ -1,0 +1,147 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-md-5"></div>
+        <div class="col-md-8">
+            <div class="card card-plain">
+                <div class="card-header card-header-tabs card-header-danger">
+                    <div class="nav-tabs-navigation">
+                        <div class="nav-tabs-wrapper d-flex justify-content-between">
+                            <span class="nav-tabs-title">Filter:</span>
+                            <div class="d-flex align-items-center">
+                                <mat-form-field>
+                                    <mat-label class="site-label">Select Site</mat-label>
+                                    <mat-select formControlName="site" class="white-text"
+                                                (selectionChange)="onSiteSelectionChange($event.value)">
+                                        <mat-option *ngFor="let site of siteOptions" [value]="site.name">{{ site.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                                <ul class="nav nav-tabs" data-tabs="tabs">
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link active" href="#all" data-toggle="tab"
+                                           (click)="applyFilter('all')">
+                                            <i class="material-icons">all_inclusive</i> All
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#payment" data-toggle="tab"
+                                           (click)="applyFilter('Regular')">
+                                            <i class="material-icons">directions_car</i> Regular
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a mat-button class="nav-link" href="#fuel" data-toggle="tab"
+                                           (click)="applyFilter('Addon')">
+                                            <i class="material-icons">add_circle</i> Addon
+                                            <div class="ripple-container"></div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover card-body">
+                                <thead class="">
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Vehicle No.</th>
+                                <th>Type</th>
+                                <th>Select</th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of filterUserData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ user.userName }}</td>
+                                    <td>{{ user['rc number'] }}</td>
+                                    <td>{{ user.type }}</td>
+                                    <td style="align-items: center">
+                                        <div class="form-check">
+                                            <label class="form-check-label">
+                                                <input #checkboxes class="form-check-input" type="checkbox"
+                                                       (change)="updateCount(user,$event.target.checked)" value="user">
+                                                <span class="form-check-sign"><span class="check"></span></span>
+                                            </label>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-primary" (click)="openDialog()">Assign Work</button>
+                    <div class="form-check" (click)="selectAll()">
+                        <label class="form-check-label">
+                            <input #selectAllCheckbox class="form-check-input" type="checkbox" value="">
+                            Select All
+                            <span class="form-check-sign">
+                <span class="check"></span>
+            </span>
+                        </label>
+                    </div>
+                </div>
+                <span style="align-items: center;text-align: end">Selected Vehicle Count {{ checkedCount }}</span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="card card-plain">
+            <div class="card-header card-header-tabs card-header-danger">
+                <div class="nav-tabs-navigation">
+                    <div class="nav-tabs-wrapper d-flex justify-content-between">
+                        <span class="nav-tabs-title">Filter:</span>
+                        <div class="d-flex align-items-center">
+                            <mat-form-field>
+                                <mat-label class="site-label">Select Site</mat-label>
+                                <mat-select formControlName="site" class="white-text"
+                                            (selectionChange)="onWorkAssignSelected($event.value)">
+                                    <mat-option *ngFor="let site of siteOptions" [value]="site.name">{{ site.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover card-body">
+                            <thead class="">
+                            <tr>
+                                <th>Id</th>
+                                <th>Datetime</th>
+                                <th>Site Name</th>
+                                <th>User Name</th>
+                                <th>Phone Number</th>
+                                <th>RC Number</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let entry of filterWorkAssignData; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ entry.datetime.toDate() | date:'short' }}</td>
+                                <td>{{ entry.siteName }}</td>
+                                <td>{{ entry.userName }}</td>
+                                <td>{{ entry.phone }}</td>
+                                <td>{{ entry.RcNo }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
