@@ -11,9 +11,9 @@
     "e2e": "ng e2e",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && ng serve -o"
   },
-  "engines": {
-    "node": "6.11.1",
-    "npm": "3.10.9"
+ "engines": {
+    "node": "22.4.0",
+    "npm": "10.8.1"
   },
   "private": true,
   "dependencies": {
