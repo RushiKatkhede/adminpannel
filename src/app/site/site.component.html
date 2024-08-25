@@ -1,0 +1,152 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Add Site</h4>
+                        <p class="card-category">Add Your Site here</p>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="onSubmit()">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Site Name" type="text" [(ngModel)]="siteName">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Address" type="text" [(ngModel)]="siteAddress">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Longitude" type="text" [(ngModel)]="longitude">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Latitude" type="text" [(ngModel)]="latitude">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <label>Site Link</label>
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput
+                                                  placeholder="Link" [(ngModel)]="siteLink"></textarea>
+                                    </mat-form-field>
+                                    <!-- <div class="form-group">
+
+                                        <div class="form-group">
+                                            <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
+                                            <textarea class="form-control" rows="5"></textarea>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Add Site
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/sitelogopng.png"/>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">Site Registration Information</h6>
+                        <h4 class="card-title">Obtaining Coordinates and Link</h4>
+                        <p class="card-description">
+                            To get longitude and latitude coordinates, right-click on the desired location in Google
+                            Maps, select "What's here?", and copy the displayed coordinates. For a shareable link, click
+                            the "Share" button in Google Maps, ensuring accurate location information and easy access to
+                            the site.
+                        </p>
+                        <!--                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>-->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title ">Sites</h4>
+                            <p class="card-category"></p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        Site Name
+                                    </th>
+                                    <th>
+                                        Longitude
+                                    </th>
+                                    <th>
+                                        Latitude
+                                    </th>
+                                    <th>
+                                        Address
+                                    </th>
+                                    <th>
+                                        Link
+                                    </th>
+                                    <th>
+                                        Delete/Edit
+                                    </th>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let user of userData; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ user.siteName }}</td>
+                                        <td>{{ user.longitude }}</td>
+                                        <td>{{ user.latitude }}</td>
+                                        <td>{{ user.siteAddress }}</td>
+                                        <td class="text-primary">
+                                            <a [href]="user.siteLink" target="_blank"
+                                               rel="noopener noreferrer" style="color: blue;">{{ user.siteLink }}</a>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group" role="group" style="margin-right: 10px;">
+                                                <div class="btn-group" role="group" style="margin-right: 10px;">
+                                                    <button class="btn btn-link p-1 text-danger"
+                                                            (click)="deleteSite(user.siteName)">
+                                                        <i class="fa fa-trash fa-4x"></i>
+                                                    </button>
+                                                </div>
+<!--                                                <button class="btn btn-link p-1">-->
+<!--                                                    <i class="fa fa-pencil-square fa-4x"></i>-->
+<!--                                                    <ng-template #updateButton>-->
+<!--                                                        <button class="btn btn-success p-1">Update-->
+<!--                                                        </button>-->
+<!--                                                    </ng-template>-->
+<!--                                                </button>-->
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

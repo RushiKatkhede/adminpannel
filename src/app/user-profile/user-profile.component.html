@@ -1,0 +1,178 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Create Admin</h4>
+                        <p class="card-category"></p>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Company (Palhade's Multi Services)" disabled>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Email address" type="email" name="email"
+                                               formControlName="email" required>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Full Name" type="text" name="name"
+                                               formControlName="name">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Designation" formControlName="designation"
+                                               type="text" name="designation">
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select placeholder="Site" formControlName="site" name="site" required
+                                                    (selectionChange)="onSiteSelectionChange($event.value)">
+                                            <mat-option *ngFor="let site of siteOptions" [value]="site">{{ site }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Password" name="password"
+                                               formControlName="password">
+                                    </mat-form-field>
+                                    <div>
+                                        <h6 style="text-decoration-color: red; color: red;">{{ 'Contact super admin for the OTP' | lowercase }}</h6>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="!phoneSignIn;else phone"></div>
+                            <div id="recaptcha-container"></div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"
+                                    id="sign-in-button" (click)="togglePhoneSignIn()">Send OTP
+                            </button>
+                            <div class="clearfix"></div>
+                            <ng-template #phone></ng-template>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-profile">
+                    <div class="card-avatar">
+                        <a href="javascript:void(0)">
+                            <img class="img" src="./assets/img/faces/marc.jpg"/>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <h6 class="card-category text-gray">CEO / Co-Founder</h6>
+                        <h4 class="card-title">Alec Thompson</h4>
+                        <p class="card-description">
+                            Don't be scared of the truth because we need to restart the human foundation in truth And I
+                            love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...
+                        </p>
+                        <a href="javascript:void(0)" class="btn btn-danger btn-round">Follow</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title mt-0">Approved Admin</h4>
+                    <p class="card-category">All admin who get approval</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead class="">
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Site</th>
+                            <th>Email</th>
+                            <th>Password</th>
+                            <th>Designation</th>
+                            <th>Admin_Created</th>
+                            <th>Delete/Edit</th>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let user of adminList; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>
+                                    <ng-container *ngIf="selectedUserEmail !== user.email; else editModeName">
+                                        {{ user.name }}
+                                    </ng-container>
+                                    <ng-template #editModeName>
+                                        <input [(ngModel)]="selectedUser.name" class="form-control">
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <ng-container *ngIf="selectedUserEmail !== user.email; else editModeSite">
+                                        {{ user.site }}
+                                    </ng-container>
+                                    <ng-template #editModeSite>
+                                        <input [(ngModel)]="selectedUser.site" class="form-control">
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <ng-container *ngIf="selectedUserEmail !== user.email; else editModeEmail">
+                                        {{ user.email }}
+                                    </ng-container>
+                                    <ng-template #editModeEmail>
+                                        <input [(ngModel)]="selectedUser.email" class="form-control">
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <ng-container *ngIf="selectedUserEmail !== user.email; else editModePassword">
+                                        {{ user.password }}
+                                    </ng-container>
+                                    <ng-template #editModePassword>
+                                        <input [(ngModel)]="selectedUser.password" class="form-control">
+                                    </ng-template>
+                                </td>
+                                <td>
+                                    <ng-container *ngIf="selectedUserEmail !== user.email; else editModeDesignation">
+                                        {{ user.designation }}
+                                    </ng-container>
+                                    <ng-template #editModeDesignation>
+                                        <input [(ngModel)]="selectedUser.designation" class="form-control">
+                                    </ng-template>
+                                </td>
+                                <td>{{ user.submissionTime.toDate() | date }}</td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group" style="margin-right: 10px;">
+                                        <button class="btn btn-link p-1 text-danger" (click)="deleteUser(user)">
+                                            <i class="fa fa-trash fa-4x"></i>
+                                        </button>
+                                        <button class="btn btn-link p-1" (click)="setSelectedUser(user)">
+                                            <ng-container *ngIf="selectedUserEmail !== user.email; else updateButton">
+                                                <i class="fa fa-pencil-square fa-4x"></i>
+                                            </ng-container>
+                                            <ng-template #updateButton>
+                                                <button class="btn btn-success p-1" (click)="update(user)">Update</button>
+                                            </ng-template>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

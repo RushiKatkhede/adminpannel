@@ -1,0 +1,219 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Payment Generate</h4>
+                        <p class="card-category">generate your payment here</p>
+                    </div>
+                    <div class="card-body">
+                        <form (ngSubmit)="onSubmit()" [formGroup]="form">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-field">
+                                        <!-- Add change event to the mat-select -->
+                                        <!-- Add change event to the mat-select -->
+                                        <mat-form-field class="example-full-width">
+                                            <mat-select placeholder="Site" formControlName="site" name="site" required
+                                                        (selectionChange)="onSiteSelectionChange($event.value)">
+                                                <mat-option *ngFor="let site of siteOptions" [value]="site">{{ site }}
+                                                </mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select placeholder="User Name"
+                                                    name="userName" formControlName="name" required>
+                                            <mat-option *ngFor="let user of userNameData" [value]="user">
+                                                {{ user.userName }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Amount" type="text" formControlName="amount">
+                                    </mat-form-field>
+                                </div>
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <mat-select placeholder="Remark" formControlName="remark" required>
+                                            <mat-option *ngFor="let remark of remarkOption"
+                                                        [value]="remark">{{ remark }}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right">Payment Request
+                            </button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-danger">
+                            <h4 class="card-title ">Pending payment request</h4>
+                            <p class="card-category">make payment add transaction id here</p>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                    <th>ID</th>
+                                    <th>Amount</th>
+                                    <th>Remark</th>
+                                    <th>Site</th>
+                                    <th>Submission Time</th>
+                                    <th>User Name</th>
+                                    <th>Bank</th>
+                                    <th>Acc.No.</th>
+                                    <th>IFSC</th>
+                                    <th>Status</th>
+                                    </thead>
+                                    <tbody>
+                                    <tr *ngFor="let user of paymentPendingData; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ user.amount }}</td>
+                                        <td>{{ user.remark }}</td>
+                                        <td>{{ user.site }}</td>
+                                        <td>{{ user.submissionTime.toDate() | date: 'dd-MM-yyyy // HH:mm' }}</td>
+                                        <td>{{ user.userData?.userName }}</td>
+                                        <td>{{ user.userData?.bank }}</td>
+                                        <td>{{user.userData?.accno}}</td>
+                                        <td>{{ user.userData?.ifsc }}</td>
+
+                                        <td>
+                                            <button mat-raised-button color="warn"
+                                                    (click)="openPaymentDialog(user)">
+                                                Pay
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">Payment History</h4>
+                        <p class="card-category">All payments history</p>
+                        <div class="card-header card-header-tabs card-header-danger">
+                            <div class="nav-tabs-navigation">
+                                <div class="nav-tabs-wrapper">
+                                    <span class="nav-tabs-title">Filter:</span>
+                                    <ul class="nav nav-tabs" data-tabs="tabs">
+                                        <li class="nav-item">
+                                            <a mat-button class="nav-link active" href="#all" data-toggle="tab"
+                                               (click)="applyFilter('all')">
+                                                <i class="material-icons">all_inclusive</i> All
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a mat-button class="nav-link" href="#payment" data-toggle="tab"
+                                               (click)="applyFilter('payment')">
+                                                <i class="material-icons">payment</i> Payment
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a mat-button class="nav-link" href="#fuel" data-toggle="tab"
+                                               (click)="applyFilter('fuel')">
+                                                <i class="material-icons">local_gas_station</i> Fuel
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a mat-button class="nav-link" href="#other" data-toggle="tab"
+                                               (click)="applyFilter('other')">
+                                                <i class="material-icons">insert_drive_file</i> Other
+                                                <div class="ripple-container"></div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="paymentHistory">
+                                <thead class="">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Number
+                                </th>
+                                <th>
+                                    site
+                                </th>
+                                <th>
+                                    transactionID
+                                </th>
+                                <th>
+                                    amount
+                                </th>
+
+                                <th>
+                                    bank
+                                </th>
+                                <th>
+                                    remark
+                                </th>
+                                <th>
+                                    submitTime
+                                </th>
+                                <th>
+                                    RequestTime
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of filteredPaymentHistoryData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>
+                                        {{ user.userName }}
+                                    </td>
+                                    <td>
+                                        {{ user.phone }}
+                                    </td>
+                                    <td>
+                                        {{ user.sitename }}
+                                    </td>
+                                    <td>{{ user.transactionID }}</td>
+                                    <td>{{ user.amount }}</td>
+                                    <td>{{ user.bank }}</td>
+                                    <td>{{ user.remark }}</td>
+                                    <td>{{ user.submissionTime.toDate() | date: 'dd-MM-yyyy // HH:mm ' }}</td>
+                                    <td>{{ user.RequestTime.toDate() | date: 'dd-MM-yyyy // HH:mm ' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" (click)="exportToExcel()">Export to Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

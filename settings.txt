@@ -1,0 +1,4 @@
+root:  D:\angular\material-dashboard-angular2-master\adminpannel 
+path: C:\Program Files\nodejs 
+arch: 64 
+proxy: none

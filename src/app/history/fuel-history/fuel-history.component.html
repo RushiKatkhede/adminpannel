@@ -1,0 +1,135 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Fuel Requests</h4>
+                        <p class="card-category">check user fuel requests</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Rc Number
+                                </th>
+                                <th>
+                                    Site
+                                </th>
+                                <th>
+                                    Bank
+                                </th>
+                                <th>
+                                    Acc_No.
+                                </th>
+                                <th>
+                                    IFSC
+                                </th>
+                                <th>
+                                    RequestTime
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of approvedData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ user.userName }}</td>
+                                    <td> {{ user['rc number'] }}</td>
+                                    <td> {{ user.sitename }}</td>
+                                    <td> {{ user.bank }}</td>
+                                    <td> {{ user.accno }}</td>
+                                    <td> {{ user.ifsc }}</td>
+                                    <td>{{ user.fuelrequest | date:'dd-MM-yyyy hh:mm:a' }}</td>
+                                    <td>
+                                        <button mat-raised-button color="warn"
+                                                (click)="openPaymentDialog(user)">
+                                            {{ user.status }}
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">Fuel History</h4>
+                        <p class="card-category">All users fuel history</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="fuelHistory">
+                                <thead class="">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Number
+                                </th>
+                                <th>
+                                    site
+                                </th>
+                                <th>
+                                    transactionID
+                                </th>
+                                <th>
+                                    amount
+                                </th>
+
+                                <th>
+                                    bank
+                                </th>
+                                <th>
+                                    remark
+                                </th>
+                                <th>
+                                    submitTime
+                                </th>
+                                <th>
+                                    fuelRequestTime
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of fuelHistoryData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>
+                                        {{ user.userName }}
+                                    </td>
+                                    <td>
+                                        {{ user.phone }}
+                                    </td>
+                                    <td>
+                                        {{ user.sitename }}
+                                    </td>
+                                    <td>{{ user.transactionID }}</td>
+                                    <td>{{ user.amount }}</td>
+                                    <td>{{ user.bank }}</td>
+                                    <td>{{ user.remark }}</td>
+                                    <td>{{ user.submissionTime.toDate() | date: 'dd-MM-yyyy // HH:mm ' }}</td>
+                                    <td>{{ user.RequestTime.toDate() | date: 'dd-MM-yyyy // HH:mm ' }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" (click)="exportToExcel()">Export to Excel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

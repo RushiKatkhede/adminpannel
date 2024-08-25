@@ -1,0 +1,51 @@
+<!--<div id="map"></div>-->
+
+
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header card-header-danger">
+                    <h4 class="card-title ">Users Pending</h4>
+                    <p class="card-category">approve user to login</p>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead class=" text-primary">
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Latitude
+                            </th>
+                            <th>
+                                Longitude
+                            </th>
+                            <th>Speed</th>
+                            <th>Accuracy</th>
+                            <!--                            <th>Time</th>-->
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let userData of approvedData; let i = index">
+                                <td>{{ i + 1 }}</td>
+                                <td>{{ userData.userName }}</td>
+                                <td>{{ userData.locationData.Accuracy || '-' }}</td>
+                                <td>{{ userData.locationData.Altitude || '-' }}</td>
+                                <td>{{ userData.locationData.Bearing || '-' }}</td>
+                                <td>{{ userData.locationData.Latitude || '-' }}</td>
+                                <!--                                <td>{{ user.Time ? user.Time.toDate() : '-' }}</td>-->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+

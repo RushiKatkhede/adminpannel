@@ -1,0 +1,230 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Users Pending</h4>
+                        <p class="card-category">approve user to login</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Number
+                                </th>
+                                <th>
+                                    Vehicle Model
+                                </th>
+                                <th>
+                                    Status
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of userData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>{{ user.userName }}</td>
+                                    <td>{{ user.phone }}</td>
+                                    <td>{{ user.VehicleModel }}</td>
+                                    <td>
+                                        <button mat-raised-button color="warn"
+                                                (click)="openStatusDialog(user)">
+                                            {{ user.status }}
+                                        </button>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title mt-0">Approved Users</h4>
+                        <p class="card-category">All users who get approval</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead class="">
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Name
+                                </th>
+                                <th>
+                                    Number
+                                </th>
+                                <th>
+                                    Vehicle
+                                </th>
+                                <th>
+                                    Aadhaar
+                                </th>
+                                <th>
+                                    Rc No.
+                                </th>
+                                <th>
+                                    Pr/day
+                                </th>
+                                <th>
+                                    Pr/km
+                                </th>
+                                <th>
+                                    Site
+                                </th>
+                                <th>
+                                    Acc No.
+                                </th>
+                                <th>
+                                    IFSC
+                                </th>
+                                <th>
+                                    Bank
+                                </th>
+                                <th>
+                                    R/A
+                                </th>
+                                <th>
+                                    Delete/Edit
+                                </th>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let user of approvedData; let i = index">
+                                    <td>{{ i + 1 }}</td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeName">
+                                            {{ user.userName }}
+                                        </ng-container>
+                                        <ng-template #editModeName>
+                                            <input [(ngModel)]="selectedUser.userName" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeNumber">
+                                            {{ user.phone }}
+                                        </ng-container>
+                                        <ng-template #editModeNumber>
+                                            <input [(ngModel)]="selectedUser.phone" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeVehicle">
+                                            {{ user.VehicleModel }}
+                                        </ng-container>
+                                        <ng-template #editModeVehicle>
+                                            <input [(ngModel)]="selectedUser.VehicleModel" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeAadhaar">
+                                            {{ user['aadhar number'] }}
+                                        </ng-container>
+                                        <ng-template #editModeAadhaar>
+                                            <input [(ngModel)]="selectedUser['aadhar number']" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeRcNo">
+                                            {{ user['rc number'] }}
+                                        </ng-container>
+                                        <ng-template #editModeRcNo>
+                                            <input [(ngModel)]="selectedUser['rc number']" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <!-- Add the rest of your table row -->
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModePPD">
+                                            {{ user.ppd }}
+                                        </ng-container>
+                                        <ng-template #editModePPD>
+                                            <input [(ngModel)]="selectedUser.ppd" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModePPK">
+                                            {{ user.ppk }}
+                                        </ng-container>
+                                        <ng-template #editModePPK>
+                                            <input [(ngModel)]="selectedUser.ppk" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeSite">
+                                            {{ user.sitename }}
+                                        </ng-container>
+                                        <ng-template #editModeSite>
+                                            <input [(ngModel)]="selectedUser.sitename" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeAccNo">
+                                            {{ user.accno }}
+                                        </ng-container>
+                                        <ng-template #editModeAccNo>
+                                            <input [(ngModel)]="selectedUser.accno" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeIFSC">
+                                            {{ user.ifsc }}
+                                        </ng-container>
+                                        <ng-template #editModeIFSC>
+                                            <input [(ngModel)]="selectedUser.ifsc" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeBank">
+                                            {{ user.bank }}
+                                        </ng-container>
+                                        <ng-template #editModeBank>
+                                            <input [(ngModel)]="selectedUser.bank" class="form-control">
+                                        </ng-template>
+                                    </td>
+                                    <td>
+                                        <ng-container *ngIf="selectedUserNumber !== user.phone; else editModeType">
+                                            {{ user.type }}
+                                        </ng-container>
+                                        <ng-template #editModeType>
+                                            <input [(ngModel)]="selectedUser.type" class="form-control">
+                                        </ng-template>
+                                    </td>
+
+                                    <td class="text-center">
+                                        <div class="btn-group" role="group" style="margin-right: 10px;">
+                                            <button class="btn btn-link p-1 text-danger" (click)="deleteUser(user)">
+                                                <i class="fa fa-trash fa-4x"></i>
+                                            </button>
+                                            <button class="btn btn-link p-1" (click)="setSelectedUser(user)">
+                                                <ng-container
+                                                        *ngIf="selectedUserNumber !== user.phone; else updateButton">
+                                                    <i class="fa fa-pencil-square fa-4x"></i>
+                                                </ng-container>
+                                                <ng-template #updateButton>
+                                                    <button class="btn btn-success p-1" (click)="update(user)">Update
+                                                    </button>
+                                                </ng-template>
+                                            </button>
+                                        </div>
+
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
